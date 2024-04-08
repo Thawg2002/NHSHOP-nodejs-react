@@ -8,7 +8,7 @@
         sm: 576px,
         md: 768px,
         lg: 992px,
-        xl: 1200px
+        xl: 1200px,
     );
 
     @if map-has-key($breakpoints, $size) {
@@ -20,13 +20,19 @@
         @error "No breakpoint found for #{$size}.";
     }
 }
-@mixin responsive-font($min-size, $max-size, $min-width: null, $max-width: null) {
+@mixin responsive-font(
+    $min-size,
+    $max-size,
+    $min-width: null,
+    $max-width: null
+) {
     font-size: $min-size;
     @if $min-width {
         @media (min-width: $min-width) {
             font-size: calc(
-                #{$min-size} + (#{$max-size} - #{$min-size}) * ((100vw - #{$min-width}) /
-                            (#{$max-width} - #{$min-width}))
+                #{$min-size} + (#{$max-size} - #{$min-size}) * ((
+                                100vw - #{$min-width}
+                            ) / (#{$max-width} - #{$min-width}))
             );
         }
     }
@@ -35,4 +41,10 @@
             font-size: $max-size;
         }
     }
+}
+@mixin font($size, $weight, $lineHeight, $align) {
+    font-size: $size;
+    font-weight: $weight;
+    line-height: $lineHeight;
+    text-align: $align;
 }

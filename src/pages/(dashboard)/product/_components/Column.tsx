@@ -5,9 +5,7 @@ import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
+    DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
@@ -54,7 +52,7 @@ export const columns: ColumnDef<IProduct>[] = [
         accessorKey: "category",
         header: "Danh mục",
         cell: ({ row }) => {
-            return <div>{row?.original?.category?.name}</div>;
+            return <div>{row?.original?.category}</div>;
         },
     },
     {

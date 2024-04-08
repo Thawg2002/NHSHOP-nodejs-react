@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-
 import {
     ColumnFiltersState,
     SortingState,
@@ -13,23 +12,18 @@ import {
 } from "@tanstack/react-table";
 import { Plus } from "lucide-react";
 import { Link } from "react-router-dom";
-
 import { useProductQuery } from "@/common/hooks/useProductQuery";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { columns } from "./Column";
 import DataTable from "./DataTable";
 import FooterTable from "./FooterTable";
 import HeaderTable from "./HeaderTable";
 
-const ProductList = () => {
-    const { data, isLoading } = useProductQuery();
-    // const { data, isLoading } = useProductQuery({
-    //     _expand: "category",
-    //     _limit: 100,
-    // });
-    useEffect(() => {
-        console.log(data);
-    }, [data]);
+export const ProductList = () => {
+    const { data, isLoading } = useProductQuery({
+        _expand: "category",
+        _limit: 100,
+    });
     const [sorting, setSorting] = useState<SortingState>([]);
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
     const [columnVisibility, setColumnVisibility] = useState<VisibilityState>(
@@ -38,7 +32,7 @@ const ProductList = () => {
     const [rowSelection, setRowSelection] = useState({});
 
     const table = useReactTable({
-        data: data ?? [],
+        data: data?.data ?? [],
         columns,
         onSortingChange: setSorting,
         onColumnFiltersChange: setColumnFilters,
@@ -55,7 +49,6 @@ const ProductList = () => {
             rowSelection,
         },
     });
-
     return (
         <>
             <div className="flex justify-between items-center py-3">
@@ -87,23 +80,21 @@ const ProductList = () => {
                             <>
                                 <table className="w-full">
                                     <thead>
-                                        <tr>
-                                            <th>
-                                                <Skeleton className="w-full h-[25px] rounded-full" />
-                                            </th>
-                                            <th>
-                                                <Skeleton className="w-full h-[25px] rounded-full" />
-                                            </th>
-                                            <th>
-                                                <Skeleton className="w-full h-[25px] rounded-full" />
-                                            </th>
-                                            <th>
-                                                <Skeleton className="w-full h-[25px] rounded-full" />
-                                            </th>
-                                            <th>
-                                                <Skeleton className="w-full h-[25px] rounded-full" />
-                                            </th>
-                                        </tr>
+                                        <th>
+                                            <Skeleton className="w-full h-[25px] rounded-full" />
+                                        </th>
+                                        <th>
+                                            <Skeleton className="w-full h-[25px] rounded-full" />
+                                        </th>
+                                        <th>
+                                            <Skeleton className="w-full h-[25px] rounded-full" />
+                                        </th>
+                                        <th>
+                                            <Skeleton className="w-full h-[25px] rounded-full" />
+                                        </th>
+                                        <th>
+                                            <Skeleton className="w-full h-[25px] rounded-full" />
+                                        </th>
                                     </thead>
                                     <tbody>
                                         <tr>
@@ -138,5 +129,3 @@ const ProductList = () => {
         </>
     );
 };
-
-export default ProductList;

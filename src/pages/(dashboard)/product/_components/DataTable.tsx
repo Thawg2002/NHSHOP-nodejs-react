@@ -9,7 +9,10 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
+
 const DataTable = ({ table, columns }: any) => {
+   
+    
     return (
         <Table>
             <TableHeader>
@@ -50,7 +53,7 @@ const DataTable = ({ table, columns }: any) => {
                 ) : (
                     <TableRow>
                         <TableCell
-                            colSpan={columns.length}
+                            colSpan={columns?.length}
                             className="h-24 text-center"
                         >
                             No results.
